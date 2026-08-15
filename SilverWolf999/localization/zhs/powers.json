@@ -1,0 +1,14 @@
+{
+    "SILVER_WOLF999_POWER_LAUGH_POINT_POWER.title": "笑点",
+    "SILVER_WOLF999_POWER_LAUGH_POINT_POWER.description": "回合结束时，对所有敌人造成伤害（受[blue]笑点[/blue]层数与[blue]增笑[/blue]影响），随后本状态消失。",
+    "SILVER_WOLF999_POWER_LAUGH_POINT_POWER.smartDescription": "回合结束时，对所有敌人造成[blue]{Damage}[/blue]点伤害，随后获得相同层数的[blue]好活当赏-剩余2回合[/blue]，本状态消失。",
+    "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.title": "增笑",
+    "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.description": "使[blue]笑点[/blue]的回合结束伤害基础值提高。",
+    "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.smartDescription": "每层使[blue]笑点[/blue]的回合结束伤害基础值+1。当前加成：[blue]{Amount}[/blue]。",
+    "SILVER_WOLF999_POWER_APPRECIATION_TWO_POWER.title": "好活当赏-剩余2回合",
+    "SILVER_WOLF999_POWER_APPRECIATION_TWO_POWER.description": "回合结束时消失，并获得相同层数的[blue]好活当赏-剩余1回合[/blue]。",
+    "SILVER_WOLF999_POWER_APPRECIATION_TWO_POWER.smartDescription": "（{Amount}层）回合结束时消失，并获得相同层数的[blue]好活当赏-剩余1回合[/blue]。",
+    "SILVER_WOLF999_POWER_APPRECIATION_ONE_POWER.title": "好活当赏-剩余1回合",
+    "SILVER_WOLF999_POWER_APPRECIATION_ONE_POWER.description": "回合结束时消失。",
+    "SILVER_WOLF999_POWER_APPRECIATION_ONE_POWER.smartDescription": "（{Amount}层）回合结束时消失。"
+}

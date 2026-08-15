@@ -1,0 +1,14 @@
+{
+  "id": "SilverWolf999",           
+  "name": "银狼LV.999模组",
+  "author": "代码和我跑一个",
+  "description": "孩子们，狼尊不是区……",
+  "version": "0.1.0",
+  "min_game_version": "0.107.0", 
+  "has_pck": true,         
+  "has_dll": true,        
+  "dependencies": [
+    { "id": "STS2-RitsuLib", "min_version": "0.5.12" }
+  ],
+  "affects_gameplay": true 
+}
