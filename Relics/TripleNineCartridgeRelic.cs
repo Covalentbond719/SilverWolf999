@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -13,8 +14,8 @@ namespace SilverWolf999.Relics;
 
 /// <summary>
 /// 999卡带：
-/// 你每打出1张牌，获得1个"笑点"。
-/// 每场战斗开始时，获得10层"好活当赏-剩余2回合"。
+/// 你每打出1张牌，获得1个"笑点"（Punchline）。
+/// 每场战斗开始时，获得5层"好活当赏-剩余2回合"（Certified Banger）。
 /// </summary>
 [RegisterRelic(typeof(SharedRelicPool))]
 public class TripleNineCartridgeRelic : ModRelicTemplate
@@ -30,6 +31,13 @@ public class TripleNineCartridgeRelic : ModRelicTemplate
         BigIconPath: "res://SilverWolf999/images/relics/triple_nine_cartridge_big.png"
     );
 
+    // 悬浮提示：预览获得的能力
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+    [
+        HoverTipFactory.FromPower<PunchlinePower>(),
+        HoverTipFactory.FromPower<CertifiedBangerTwoPower>(),
+    ];
+
     // 每打出1张牌，获得1个笑点
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -39,13 +47,13 @@ public class TripleNineCartridgeRelic : ModRelicTemplate
             return;
         }
 
-        await PowerCmd.Apply<LaughPointPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
+        await PowerCmd.Apply<PunchlinePower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
     }
 
-    // 每场战斗开始时，获得10层"好活当赏-剩余2回合"
+    // 每场战斗开始时，获得5层"好活当赏-剩余2回合"
     public override async Task BeforeCombatStart()
     {
         Flash();
-        await PowerCmd.Apply<AppreciationTwoPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 10, Owner.Creature, null);
+        await PowerCmd.Apply<CertifiedBangerTwoPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 5, Owner.Creature, null);
     }
 }

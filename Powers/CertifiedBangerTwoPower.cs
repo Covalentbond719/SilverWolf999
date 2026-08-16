@@ -11,11 +11,11 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace SilverWolf999.Powers;
 
 /// <summary>
-/// 好活当赏-剩余2回合：暂时是纯粹的计数器。
+/// 好活当赏-剩余2回合（Certified Banger - 2 turns remaining）：暂时是纯粹的计数器。
 /// 回合结束时消失，并在下回合开始时获得相同层数的"好活当赏-剩余1回合"。
 /// </summary>
 [RegisterPower]
-public class AppreciationTwoPower : ModPowerTemplate
+public class CertifiedBangerTwoPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
 
@@ -36,7 +36,7 @@ public class AppreciationTwoPower : ModPowerTemplate
         Flash();
 
         // 转化为同层数的"好活当赏-剩余1回合"，然后本状态消失
-        await PowerCmd.Apply<AppreciationOnePower>(choiceContext, Owner, Amount, Owner, null);
+        await PowerCmd.Apply<CertifiedBangerOnePower>(choiceContext, Owner, Amount, Owner, null);
         await PowerCmd.Remove(this);
     }
 }

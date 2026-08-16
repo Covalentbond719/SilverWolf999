@@ -1,14 +1,29 @@
 {
-    "SILVER_WOLF999_POWER_LAUGH_POINT_POWER.title": "笑点",
-    "SILVER_WOLF999_POWER_LAUGH_POINT_POWER.description": "回合结束时，对所有敌人造成伤害（受[blue]笑点[/blue]层数与[blue]增笑[/blue]影响），随后本状态消失。",
-    "SILVER_WOLF999_POWER_LAUGH_POINT_POWER.smartDescription": "回合结束时，对所有敌人造成[blue]{Damage}[/blue]点伤害，随后获得相同层数的[blue]好活当赏-剩余2回合[/blue]，本状态消失。",
+    "SILVER_WOLF999_POWER_PUNCHLINE_POWER.title": "笑点",
+    "SILVER_WOLF999_POWER_PUNCHLINE_POWER.description": "回合结束时发动阿哈时刻，对所有敌人造成伤害，随后获得好活当赏并清空笑点。",
+    "SILVER_WOLF999_POWER_PUNCHLINE_POWER.smartDescription": "回合结束时发动阿哈时刻，对所有敌人造成[blue]{Damage}[/blue]点伤害，随后获得相同层数的[gold]好活当赏[/gold]，并清空笑点。",
+
     "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.title": "增笑",
-    "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.description": "使[blue]笑点[/blue]的回合结束伤害基础值提高。",
-    "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.smartDescription": "每层使[blue]笑点[/blue]的回合结束伤害基础值+1。当前加成：[blue]{Amount}[/blue]。",
-    "SILVER_WOLF999_POWER_APPRECIATION_TWO_POWER.title": "好活当赏-剩余2回合",
-    "SILVER_WOLF999_POWER_APPRECIATION_TWO_POWER.description": "回合结束时消失，并获得相同层数的[blue]好活当赏-剩余1回合[/blue]。",
-    "SILVER_WOLF999_POWER_APPRECIATION_TWO_POWER.smartDescription": "（{Amount}层）回合结束时消失，并获得相同层数的[blue]好活当赏-剩余1回合[/blue]。",
-    "SILVER_WOLF999_POWER_APPRECIATION_ONE_POWER.title": "好活当赏-剩余1回合",
-    "SILVER_WOLF999_POWER_APPRECIATION_ONE_POWER.description": "回合结束时消失。",
-    "SILVER_WOLF999_POWER_APPRECIATION_ONE_POWER.smartDescription": "（{Amount}层）回合结束时消失。"
+    "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.description": "[gold]欢愉伤害[/gold]的基础值提高。",
+    "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.smartDescription": "[gold]欢愉伤害[/gold]的基础值提高[blue]{Amount}[/blue]。",
+
+    "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.title": "好活当赏-剩余2回合",
+    "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.description": "好活当赏会影响欢愉伤害和卡牌效果，且分别计算持续时间",
+    "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.smartDescription": "影响[gold]欢愉伤害[/gold]和部分卡牌的效果。[blue]{Amount}[/blue]点好活当赏还剩余2回合。",
+    
+    "SILVER_WOLF999_POWER_CERTIFIED_BANGER_ONE_POWER.title": "好活当赏-剩余1回合",
+    "SILVER_WOLF999_POWER_CERTIFIED_BANGER_ONE_POWER.description": "好活当赏会影响欢愉伤害和卡牌效果，且分别计算持续时间",
+    "SILVER_WOLF999_POWER_CERTIFIED_BANGER_ONE_POWER.smartDescription": "影响[gold]欢愉伤害[/gold]和部分卡牌的效果。[blue]{Amount}[/blue]点好活当赏还剩余1回合。",
+    
+    "SILVER_WOLF999_POWER_HIDDEN_MMR_POWER.title": "隐藏分",
+    "SILVER_WOLF999_POWER_HIDDEN_MMR_POWER.description": "隐藏分累计到60时，将一张[gold]无敌玩家[/gold]加入手牌。每获得30点隐藏分，获得1点[gold]力量[/gold]。",
+    "SILVER_WOLF999_POWER_HIDDEN_MMR_POWER.smartDescription": "当前隐藏分：[blue]{Amount}[/blue]。隐藏分累计到60时，将一张[gold]无敌玩家[/gold]加入手牌。每获得30点隐藏分获得1点[gold]力量[/gold]。",
+    
+    "SILVER_WOLF999_POWER_GOD_MODE_POWER.title": "无敌玩家",
+    "SILVER_WOLF999_POWER_GOD_MODE_POWER.description": "下2个回合开始时，将一张[gold]隐藏关：狼尊时刻[/gold]加入你的手牌。",
+    "SILVER_WOLF999_POWER_GOD_MODE_POWER.smartDescription": "下[blue]{Amount}[/blue]个回合开始时，将1张[gold]隐藏关：狼尊时刻[/gold]加入你的手牌。",
+
+    "SILVER_WOLF999_POWER_MIRTH_POWER.title": "如是众生欢笑不已",
+    "SILVER_WOLF999_POWER_MIRTH_POWER.description": "你每获得1个[gold]笑点[/gold]，获得1点[gold]隐藏分[/gold]。",
+    "SILVER_WOLF999_POWER_MIRTH_POWER.smartDescription": "你每获得1个[gold]笑点[/gold]，获得1点[gold]隐藏分[/gold]。"
 }

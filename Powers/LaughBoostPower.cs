@@ -6,7 +6,7 @@ namespace SilverWolf999.Powers;
 
 /// <summary>
 /// 增笑：玩法定位类似机器人的"集中"。纯粹的数值能力，无自身逻辑。
-/// 每层使"笑点"的回合结束伤害基础值 +1（被 LaughPointPower 读取）。
+/// 每层使"笑点"的回合结束伤害基础值 +1（被 PunchlinePower 读取）。
 /// </summary>
 [RegisterPower]
 public class LaughBoostPower : ModPowerTemplate

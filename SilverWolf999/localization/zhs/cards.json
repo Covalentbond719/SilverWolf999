@@ -1,4 +1,16 @@
 {
-    "SILVER_WOLF999_CARD_TEST_CARD.title": "测试卡牌",
-    "SILVER_WOLF999_CARD_TEST_CARD.description": "造成{Damage:diff()}点伤害。"
+    "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.title": "捧腹",
+    "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.description": "造成{Damage:diff()}点[gold]欢愉伤害[/gold]。",
+    "SILVER_WOLF999_CARD_GOD_MODE_CARD.title": "无敌玩家，启动！",
+    "SILVER_WOLF999_CARD_GOD_MODE_CARD.description": "加入一张[gold]{IfUpgraded:show:隐藏关：狼尊时刻+|隐藏关：狼尊时刻}[/gold]到你的手牌。下2个回合开始时，加入一张[gold]{IfUpgraded:show:隐藏关：狼尊时刻+|隐藏关：狼尊时刻}[/gold]到你的手牌。",
+    "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.title": "隐藏关：狼尊时刻",
+    "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.description": "对全体敌人造成{Damage:diff()}点[gold]欢愉伤害[/gold]{IfUpgraded:show:2次|}，然后对随机敌人造成{Damage:diff()}点[gold]欢愉伤害[/gold]{IfUpgraded:show:X+1次|X次}。",
+    "SILVER_WOLF999_CARD_SMILE_CARD.title": "莞尔",
+    "SILVER_WOLF999_CARD_SMILE_CARD.description": "[gold]欢愉[/gold]：获得{Block:diff()}点格挡。\n获得{Punchline:diff()}个[gold]笑点[/gold]、{Mmr:diff()}点[gold]隐藏分[/gold]和{Banger:diff()}点[gold]好活当赏[/gold]。",
+    "SILVER_WOLF999_CARD_MIRTH_CARD.title": "如是众生欢笑不已",
+    "SILVER_WOLF999_CARD_MIRTH_CARD.description": "你每获得1个[gold]笑点[/gold]，获得1点[gold]隐藏分[/gold]。",
+    "SILVER_WOLF999_CARD_JOKE_CARD.title": "讲个段子",
+    "SILVER_WOLF999_CARD_JOKE_CARD.description": "本回合内获得1点[gold]增笑[/gold]。",
+    "SILVER_WOLF999_CARD_CROSSTALK_CARD.title": "听段相声",
+    "SILVER_WOLF999_CARD_CROSSTALK_CARD.description": "获得{Boost:diff()}点[gold]增笑[/gold]。"
 }

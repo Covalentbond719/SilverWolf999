@@ -11,11 +11,11 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace SilverWolf999.Powers;
 
 /// <summary>
-/// 好活当赏-剩余1回合：暂时是另一个纯粹的计数器。
+/// 好活当赏-剩余1回合（Certified Banger - 1 turn remaining）：暂时是另一个纯粹的计数器。
 /// 回合结束时消失。
 /// </summary>
 [RegisterPower]
-public class AppreciationOnePower : ModPowerTemplate
+public class CertifiedBangerOnePower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
 

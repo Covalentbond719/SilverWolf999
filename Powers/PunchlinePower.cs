@@ -17,13 +17,13 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace SilverWolf999.Powers;
 
 /// <summary>
-/// 笑点：回合结束时，对所有敌人造成伤害，随后本状态消失，
+/// 笑点（Punchline）：回合结束时，对所有敌人造成伤害，随后本状态消失，
 /// 并在下回合开始时获得相同层数的"好活当赏-剩余2回合"。
 ///
-/// 伤害公式：伤害 = (2 + 增笑) × (1 + 3x / (x + 24))，其中 x 为笑点层数。
+/// 伤害公式：见 PunchlineDamage.Resolve
 /// </summary>
 [RegisterPower]
-public class LaughPointPower : ModPowerTemplate
+public class PunchlinePower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
 
@@ -35,14 +35,14 @@ public class LaughPointPower : ModPowerTemplate
     );
 
     // 描述里 {Damage} 显示的数值（仅显示用，实际伤害在触发时直接计算）
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(2m, ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4m, ValueProp.Unpowered)];
 
     /// <summary>伤害 = (2 + 增笑) × (1 + 3x / (x + 24))，x = 笑点层数</summary>
     private decimal CalculateEndOfTurnDamage()
     {
         decimal x = Amount;
         decimal boost = Owner.GetPowerAmount<LaughBoostPower>();
-        decimal baseDamage = Math.Max(2m + boost, 0m);
+        decimal baseDamage = Math.Max(4m + boost, 0m);
         return baseDamage * (1m + 3m * x / (x + 24m));
     }
 
@@ -80,7 +80,7 @@ public class LaughPointPower : ModPowerTemplate
 
         // 清空自身，并在"下回合"转化为同层数的"好活当赏-剩余2回合"
         // （实际挂载发生在回合结束结算阶段，对玩家来说下回合开始时已可见）
-        await PowerCmd.Apply<AppreciationTwoPower>(choiceContext, Owner, Amount, Owner, null);
+        await PowerCmd.Apply<CertifiedBangerTwoPower>(choiceContext, Owner, Amount, Owner, null);
         await PowerCmd.Remove(this);
     }
 }
