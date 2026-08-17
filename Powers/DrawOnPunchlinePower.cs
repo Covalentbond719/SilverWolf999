@@ -8,33 +8,27 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace SilverWolf999.Powers;
 
 /// <summary>
-/// 如是众生欢笑不已（buff）：每获得5个"笑点"，获得10点"隐藏分"和3点"格挡"。
-/// 升级后奖励 12 隐藏分 + 4 格挡（由卡牌通过 SetRewards 传入）。累计余数跨回合保留。
+/// 我的回合，抽卡！（buff）：每获得 Step（12，升级后10）个"笑点"，抽1张牌。
+/// 累计跨回合保留余数。
 /// </summary>
 [RegisterPower]
-public class MirthPower : ModPowerTemplate
+public class DrawOnPunchlinePower : ModPowerTemplate
 {
-    private const int Threshold = 5;
-
     private class Data
     {
         public decimal Pending;
-        public int MmrReward = 10;
-        public int BlockReward = 3;
     }
 
-    // 描述显示用变量
+    // 用于描述显示当前阈值
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("Mmr", 10m),
-        new DynamicVar("Block", 3m),
+        new DynamicVar("Step", 12m),
     ];
 
     protected override object InitInternalData()
@@ -46,40 +40,42 @@ public class MirthPower : ModPowerTemplate
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    // 悬浮提示：预览涉及的能力
+    // 悬浮提示：预览"笑点"
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
         HoverTipFactory.FromPower<PunchlinePower>(),
-        HoverTipFactory.FromPower<HiddenMmrPower>(),
     ];
 
     public override PowerAssetProfile AssetProfile => new(
-        IconPath: "res://SilverWolf999/images/powers/mirth.png",
-        BigIconPath: "res://SilverWolf999/images/powers/mirth_big.png"
+        IconPath: "res://SilverWolf999/images/powers/draw_on_punchline.png",
+        BigIconPath: "res://SilverWolf999/images/powers/draw_on_punchline_big.png"
     );
 
-    /// <summary>设置每次触发奖励的隐藏分/格挡（升级后 12/4）</summary>
-    public void SetRewards(int mmr, int block)
+    /// <summary>设置抽卡阈值（升级后6，默认8）</summary>
+    public void SetStep(int step)
     {
-        var data = GetInternalData<Data>();
-        data.MmrReward = mmr;
-        data.BlockReward = block;
-        DynamicVars["Mmr"].BaseValue = mmr;
-        DynamicVars["Block"].BaseValue = block;
+        DynamicVars["Step"].BaseValue = step;
     }
 
-    // 每当获得笑点时累计，每满4个触发一次奖励
+    // 每当获得笑点时累计，每满 Step 抽1张牌
     public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (power is PunchlinePower && power.Owner == Owner && amount > 0)
         {
             var data = GetInternalData<Data>();
             data.Pending += amount;
-            while (data.Pending >= Threshold)
+            int step = DynamicVars["Step"].IntValue;
+            if (step <= 0)
             {
-                data.Pending -= Threshold;
-                await PowerCmd.Apply<HiddenMmrPower>(choiceContext, Owner, data.MmrReward, Owner, null);
-                await CreatureCmd.GainBlock(Owner, data.BlockReward, ValueProp.Unpowered, null);
+                return;
+            }
+            while (data.Pending >= step)
+            {
+                data.Pending -= step;
+                if (Owner.Player != null)
+                {
+                    await CardPileCmd.Draw(choiceContext, 1, Owner.Player);
+                }
             }
         }
     }

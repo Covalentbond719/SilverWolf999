@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,32 +12,30 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（这里是无色）
+// 注册卡牌到铁甲战士卡池
 [RegisterCard(typeof(NecrobinderCardPool))]
-public class JokeCard : ModCardTemplate
+public class DivineLaughterCard : ModCardTemplate
 {
-    // 消耗；升级后去除
-    public override IEnumerable<CardKeyword> CanonicalKeywords => IsUpgraded ? [] : [CardKeyword.Exhaust];
-
-    // 悬浮提示：预览"增笑"
+    // 悬浮提示：预览授予的buff + "笑点"
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
-        HoverTipFactory.FromPower<LaughBoostPower>(),
+        HoverTipFactory.FromPower<DivineLaughterPower>(),
+        HoverTipFactory.FromPower<PunchlinePower>(),
     ];
 
-    public JokeCard() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self, true)
+    public DivineLaughterCard() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self, true)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 本回合内获得1点增笑（临时包装能力，回合结束自动撤销）
-        await PowerCmd.Apply<TemporaryLaughBoostPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
+        // 每消耗1能量获得1笑点
+        await PowerCmd.Apply<DivineLaughterPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
     }
 
-    // 升级：去除消耗
+    // 升级：固有（参考原版 Afterimage）
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
+        AddKeyword(CardKeyword.Innate);
     }
 }

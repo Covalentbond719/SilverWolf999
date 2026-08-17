@@ -20,4 +20,13 @@ public static class PunchlineDamage
         decimal baseDamage = Math.Max(ctx.BaseValue + boost, 0m);
         return baseDamage * (1m + 3m * appreciation / (appreciation + 24m));
     }
+
+    /// <summary>
+    /// 升级后才走欢愉公式，未升级时返回基础值。
+    /// 用于"升级：XX带欢愉词条"这种条件效果（如又沉底了的抽牌数、向天再借一回合的能量）。
+    /// </summary>
+    public static decimal ResolveWhenUpgraded(ComputedDynamicVarContext ctx)
+    {
+        return ctx.IsUpgraded ? Resolve(ctx) : ctx.BaseValue;
+    }
 }

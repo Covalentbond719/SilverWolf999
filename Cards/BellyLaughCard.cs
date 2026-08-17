@@ -1,10 +1,11 @@
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -14,10 +15,10 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（这里是无色）。如果要写自定义池看添加人物的开头
-[RegisterCard(typeof(ColorlessCardPool))]
-// 注册成人物起始卡，后面是数量。不需要删除即可。
-// [RegisterCharacterStarterCard(typeof(TestCharacter), 5)]
+// 注册卡牌到指定池（铁甲战士卡池）
+[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册成铁甲战士的起始卡，后面是数量（2张）
+[RegisterCharacterStarterCard(typeof(Necrobinder), 2)]
 public class BellyLaughCard : ModCardTemplate
 {
     // 基础耗能
@@ -36,10 +37,12 @@ public class BellyLaughCard : ModCardTemplate
         PortraitPath: "res://SilverWolf999/images/cards/TestCard.png"
     );
 
-    // 卡牌旁出现的提示方框："欢愉伤害"词条的名词解释
+    // 卡牌旁出现的提示方框："欢愉"词条 + 好活当赏/增笑
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
-        HoverTipFactory.FromKeyword(MyKeywords.ElationDamage),
+        HoverTipFactory.FromKeyword(MyKeywords.Elation),
+        HoverTipFactory.FromPower<CertifiedBangerTwoPower>(),
+        HoverTipFactory.FromPower<LaughBoostPower>(),
     ];
 
     // 伤害公式（与"笑点/Punchline"同一套，基础值 5）：见 PunchlineDamage.Resolve

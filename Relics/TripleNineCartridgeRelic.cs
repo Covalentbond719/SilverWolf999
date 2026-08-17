@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Models.Characters;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using SilverWolf999.Powers;
@@ -17,7 +18,9 @@ namespace SilverWolf999.Relics;
 /// 你每打出1张牌，获得1个"笑点"（Punchline）。
 /// 每场战斗开始时，获得5层"好活当赏-剩余2回合"（Certified Banger）。
 /// </summary>
+// 注册到共享遗物池 + 铁甲战士起始遗物
 [RegisterRelic(typeof(SharedRelicPool))]
+[RegisterCharacterStarterRelic(typeof(Necrobinder), 1)]
 public class TripleNineCartridgeRelic : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Rare;

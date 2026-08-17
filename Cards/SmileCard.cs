@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -16,26 +16,37 @@ using SilverWolf999.Powers;
 namespace SilverWolf999.Cards;
 
 // 注册卡牌到指定池（这里是无色）
-[RegisterCard(typeof(ColorlessCardPool))]
+[RegisterCard(typeof(NecrobinderCardPool))]
 public class SmileCard : ModCardTemplate
 {
-    // 卡牌基础数值：5格挡（欢愉，公式计算） / 5笑点 / 4隐藏分 / 3好活当赏（升级后 7 / 6 / 5）
+    // 卡牌基础数值：5格挡（升级后走欢愉公式） / 5笑点 / 4隐藏分 / 3好活当赏（升级后 7 / 6 / 5）
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        ModCardVars.ComputedBlock("Block", PunchlineDamage.Resolve, 5m, ValueProp.Move),
+        ModCardVars.ComputedBlock("Block", PunchlineDamage.ResolveWhenUpgraded, 5m, ValueProp.Move),
         ModCardVars.Int("Punchline", 5),
         ModCardVars.Int("Mmr", 4),
         ModCardVars.Int("Banger", 3),
     ];
 
-    // 卡牌旁出现的提示方框："欢愉"词条说明 + 预览获得的能力
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-    [
-        HoverTipFactory.FromKeyword(MyKeywords.Joy),
-        HoverTipFactory.FromPower<PunchlinePower>(),
-        HoverTipFactory.FromPower<HiddenMmrPower>(),
-        HoverTipFactory.FromPower<CertifiedBangerTwoPower>(),
-    ];
+    // 卡牌旁出现的提示方框："欢愉"词条+增笑（升级后才挂；好活当赏常驻在给出的能力里） + 预览获得的能力
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips
+    {
+        get
+        {
+            List<IHoverTip> tips =
+            [
+                HoverTipFactory.FromPower<PunchlinePower>(),
+                HoverTipFactory.FromPower<HiddenMmrPower>(),
+                HoverTipFactory.FromPower<CertifiedBangerTwoPower>(),
+            ];
+            if (IsUpgraded)
+            {
+                tips.Add(HoverTipFactory.FromKeyword(MyKeywords.Elation));
+                tips.Add(HoverTipFactory.FromPower<LaughBoostPower>());
+            }
+            return tips;
+        }
+    }
 
     public SmileCard() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self, true)
     {
@@ -45,7 +56,7 @@ public class SmileCard : ModCardTemplate
     {
         var creature = Owner.Creature;
 
-        // 欢愉：获得公式格挡（基础5，受增笑/好活当赏影响）
+        // 格挡：升级后走欢愉公式（基础5，未升级固定5）
         decimal block = DynamicVars.EvaluateValueOrDefault("Block");
         await CreatureCmd.GainBlock(creature, block, ValueProp.Move, cardPlay);
 

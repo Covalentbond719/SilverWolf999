@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -14,14 +15,20 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（这里是无色）
+// 注册卡牌到铁甲战士卡池
 [RegisterCard(typeof(NecrobinderCardPool))]
-public class CrosstalkCard : ModCardTemplate
+public class AhaStrikeCard : ModCardTemplate
 {
-    // 基础数值：获得1点增笑（升级2点）
+    // 基础数值：6点伤害
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        ModCardVars.Int("Boost", 1),
+        ModCardVars.Damage(6m, ValueProp.Move),
+    ];
+
+    // 打击tag
+    protected override HashSet<CardTag> CanonicalTags =>
+    [
+        CardTag.Strike,
     ];
 
     // 悬浮提示：预览"增笑"
@@ -30,19 +37,25 @@ public class CrosstalkCard : ModCardTemplate
         HoverTipFactory.FromPower<LaughBoostPower>(),
     ];
 
-    public CrosstalkCard() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self, true)
+    public AhaStrikeCard() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy, true)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得永久增笑
-        await PowerCmd.Apply<LaughBoostPower>(choiceContext, Owner.Creature, DynamicVars["Boost"].IntValue, Owner.Creature, null);
+        // 造成6点伤害
+        await DamageCmd.Attack(DynamicVars["Damage"].IntValue)
+            .FromCard(this, cardPlay)
+            .Targeting(cardPlay.Target!)
+            .Execute(choiceContext);
+
+        // 本回合内+1增笑（临时）
+        await PowerCmd.Apply<TemporaryLaughBoostPower>(choiceContext, Owner.Creature, 1, Owner.Creature, null);
     }
 
-    // 升级：1 -> 2
     protected override void OnUpgrade()
     {
-        DynamicVars["Boost"].UpgradeValueBy(1m);
+        // 伤害 6 -> 9（暂定，可调整）
+        DynamicVars["Damage"].UpgradeValueBy(3m);
     }
 }

@@ -1,16 +1,85 @@
-{
-    "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.title": "捧腹",
-    "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.description": "造成{Damage:diff()}点[gold]欢愉伤害[/gold]。",
-    "SILVER_WOLF999_CARD_GOD_MODE_CARD.title": "无敌玩家，启动！",
-    "SILVER_WOLF999_CARD_GOD_MODE_CARD.description": "加入一张[gold]{IfUpgraded:show:隐藏关：狼尊时刻+|隐藏关：狼尊时刻}[/gold]到你的手牌。下2个回合开始时，加入一张[gold]{IfUpgraded:show:隐藏关：狼尊时刻+|隐藏关：狼尊时刻}[/gold]到你的手牌。",
-    "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.title": "隐藏关：狼尊时刻",
-    "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.description": "对全体敌人造成{Damage:diff()}点[gold]欢愉伤害[/gold]{IfUpgraded:show:2次|}，然后对随机敌人造成{Damage:diff()}点[gold]欢愉伤害[/gold]{IfUpgraded:show:X+1次|X次}。",
-    "SILVER_WOLF999_CARD_SMILE_CARD.title": "莞尔",
-    "SILVER_WOLF999_CARD_SMILE_CARD.description": "[gold]欢愉[/gold]：获得{Block:diff()}点格挡。\n获得{Punchline:diff()}个[gold]笑点[/gold]、{Mmr:diff()}点[gold]隐藏分[/gold]和{Banger:diff()}点[gold]好活当赏[/gold]。",
-    "SILVER_WOLF999_CARD_MIRTH_CARD.title": "如是众生欢笑不已",
-    "SILVER_WOLF999_CARD_MIRTH_CARD.description": "你每获得1个[gold]笑点[/gold]，获得1点[gold]隐藏分[/gold]。",
-    "SILVER_WOLF999_CARD_JOKE_CARD.title": "讲个段子",
-    "SILVER_WOLF999_CARD_JOKE_CARD.description": "本回合内获得1点[gold]增笑[/gold]。",
-    "SILVER_WOLF999_CARD_CROSSTALK_CARD.title": "听段相声",
-    "SILVER_WOLF999_CARD_CROSSTALK_CARD.description": "获得{Boost:diff()}点[gold]增笑[/gold]。"
+﻿{
+    "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.title":
+    "捧腹开怀",
+    "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.description":
+    "造成{Damage:diff()}点[gold]欢愉[/gold]伤害。",
+
+    "SILVER_WOLF999_CARD_GOD_MODE_CARD.title":
+    "无敌玩家，启动！",
+    "SILVER_WOLF999_CARD_GOD_MODE_CARD.description":
+    "加入一张[gold]{IfUpgraded:show:隐藏关：狼尊时刻+|隐藏关：狼尊时刻}[/gold]到你的手牌。\n下2个回合开始时，加入一张[gold]{IfUpgraded:show:隐藏关：狼尊时刻+|隐藏关：狼尊时刻}[/gold]到你的手牌。",
+
+    "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.title":
+    "隐藏关：狼尊时刻",
+    "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.description":
+    "对所有敌人造成{Damage:diff()}点[gold]欢愉[/gold]伤害{IfUpgraded:show:2次|}.\n对随机敌人造成{Damage:diff()}点[gold]欢愉[/gold]伤害{IfUpgraded:show:X+1次|X次}。",
+
+    "SILVER_WOLF999_CARD_SMILE_CARD.title":
+    "喜剧人",
+    "SILVER_WOLF999_CARD_SMILE_CARD.description":
+    "{IfUpgraded:show:[gold]欢愉[/gold]：|}获得{Block:diff()}点格挡。\n获得{Punchline:diff()}个[gold]笑点[/gold]、{Mmr:diff()}点[gold]隐藏分[/gold]和{Banger:diff()}点[gold]好活当赏[/gold]。",
+
+    "SILVER_WOLF999_CARD_MIRTH_CARD.title":
+    "如是众生欢笑不已",
+    "SILVER_WOLF999_CARD_MIRTH_CARD.description":
+    "你每获得5个[gold]笑点[/gold]，获得{Mmr:diff()}点[gold]隐藏分[/gold]和{Block:diff()}点[gold]格挡[/gold]。",
+
+    "SILVER_WOLF999_CARD_JOKE_CARD.title":
+    "灵魂段子手",
+    "SILVER_WOLF999_CARD_JOKE_CARD.description":
+    "本回合内获得1点[gold]增笑[/gold]。",
+
+    "SILVER_WOLF999_CARD_CROSSTALK_CARD.title":
+    "笑话酿的酒",
+    "SILVER_WOLF999_CARD_CROSSTALK_CARD.description":
+    "获得{Boost:diff()}点[gold]增笑[/gold]。",
+
+    "SILVER_WOLF999_CARD_SUNK_AGAIN_CARD.title":
+    "又沉底了？",
+    "SILVER_WOLF999_CARD_SUNK_AGAIN_CARD.description":
+    "造成{Damage:diff()}点[gold]欢愉[/gold]伤害。\n{IfUpgraded:show:[gold]欢愉[/gold]：|}抽{Draw:diff()}张牌。",
+
+    "SILVER_WOLF999_CARD_LOAN_FUTURE_CARD.title":
+    "贷款未来",
+    "SILVER_WOLF999_CARD_LOAN_FUTURE_CARD.description":
+    "获得5点[gold]隐藏分[/gold]。\n下个回合获得1点能量。",
+
+    "SILVER_WOLF999_CARD_AHA_STRIKE_CARD.title":
+    "阿哈，打击！",
+    "SILVER_WOLF999_CARD_AHA_STRIKE_CARD.description":
+    "造成{Damage:diff()}点伤害。\n本回合内获得1点[gold]增笑[/gold]。",
+
+    "SILVER_WOLF999_CARD_BIG_MOVE_CARD.title":
+    "整个大活",
+    "SILVER_WOLF999_CARD_BIG_MOVE_CARD.description":
+    "[gold]欢愉[/gold]：给予{IfUpgraded:show:所有敌人|一名敌人}{Layers:diff()}层[gold]虚弱[/gold]和{Layers:diff()}层[gold]易伤[/gold]。",
+
+    "SILVER_WOLF999_CARD_OUT_OF_CARDS_CARD.title":
+    "你以为我没牌了？",
+    "SILVER_WOLF999_CARD_OUT_OF_CARDS_CARD.description":
+    "从弃牌堆中选择一张牌加入你的手牌。\n获得1点能量。{IfUpgraded:show:\n抽1张牌。|}",
+    "SILVER_WOLF999_CARD_OUT_OF_CARDS_CARD.selectionScreenPrompt":
+    "选择一张牌加入手牌",
+
+    "SILVER_WOLF999_CARD_MY_TURN_DRAW_CARD.title":
+    "我的回合，抽卡！",
+    "SILVER_WOLF999_CARD_MY_TURN_DRAW_CARD.description":
+    "你每获得{IfUpgraded:show:10|12}个[gold]笑点[/gold]，抽1张牌。",
+
+    "SILVER_WOLF999_CARD_BORROW_TURN_CARD.title":
+    "向天再借一回合",
+    "SILVER_WOLF999_CARD_BORROW_TURN_CARD.description":
+    "丢弃所有手牌。\n从你的抽牌堆中选择3张牌加入你的手牌。",
+    "SILVER_WOLF999_CARD_BORROW_TURN_CARD.selectionScreenPrompt":
+    "选择3张牌加入手牌",
+
+    "SILVER_WOLF999_CARD_DIVINE_LAUGHTER_CARD.title":
+    "神说要有笑声",
+    "SILVER_WOLF999_CARD_DIVINE_LAUGHTER_CARD.description":
+    "每消耗1点能量，获得1个[gold]笑点[/gold]。",
+
+    "SILVER_WOLF999_CARD_REVELRY_CARD.title":
+    "给你一只酱板鸭",
+    "SILVER_WOLF999_CARD_REVELRY_CARD.description":
+    "获得3X个[gold]笑点[/gold]。\n[gold]欢愉[/gold]：获得{Block:diff()}X点[gold]格挡[/gold]。"
 }

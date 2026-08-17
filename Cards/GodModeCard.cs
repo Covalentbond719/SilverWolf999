@@ -11,17 +11,24 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（这里是无色）
-[RegisterCard(typeof(ColorlessCardPool))]
+// 注册到Token卡池（与小刀Shiv、君王之剑同类：只被效果创造，不进商店/奖励，无稀有度）
+[RegisterCard(typeof(TokenCardPool))]
 public class GodModeCard : ModCardTemplate
 {
-    // 卡牌旁出现的提示方框：预览"隐藏关：狼尊时刻"（升级后预览升级版）
+    // 保留
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    [
+        CardKeyword.Retain,
+    ];
+
+    // 卡牌旁出现的提示方框：预览"隐藏关：狼尊时刻"（升级后预览升级版）+ 无敌玩家buff
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
         HoverTipFactory.FromCard<WolfMomentCard>(IsUpgraded),
+        HoverTipFactory.FromPower<GodModePower>(),
     ];
 
-    public GodModeCard() : base(0, CardType.Power, CardRarity.Rare, TargetType.Self, true)
+    public GodModeCard() : base(0, CardType.Power, CardRarity.Token, TargetType.Self, false)
     {
     }
 

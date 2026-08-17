@@ -6,16 +6,12 @@ using SilverWolf999.Scripts;
 
 namespace SilverWolf999.Cards;
 
-// 自定义卡牌关键词
+// 自定义卡牌关键词（已统一为"欢愉"一词条，覆盖欢愉伤害+能量/格挡/状态效果）
 // 名词解释（title/description）是全局的，写在 {modId}/localization/{Language}/card_keywords.json，
-// 键为 {MODID}_KEYWORD_{id大写}（例如 SILVER_WOLF999_KEYWORD_ELATION_DAMAGE / _KEYWORD_JOY）。
-[RegisterOwnedCardKeyword(nameof(ElationDamage))]
-[RegisterOwnedCardKeyword(nameof(Joy))]
+// 键为 {MODID}_KEYWORD_{id大写}（例如 SILVER_WOLF999_KEYWORD_ELATION）。
+[RegisterOwnedCardKeyword(nameof(Elation))]
 public class MyKeywords
 {
-    // 欢愉伤害（Elation damage）
-    public static readonly CardKeyword ElationDamage = ModContentRegistry.GetQualifiedKeywordId(Entry.ModId, nameof(ElationDamage)).GetModCardKeyword();
-
-    // 欢愉（Joy）：好活当赏/增笑影响格挡和状态效果的场合
-    public static readonly CardKeyword Joy = ModContentRegistry.GetQualifiedKeywordId(Entry.ModId, nameof(Joy)).GetModCardKeyword();
+    // 欢愉（Elation）：欢愉伤害与受欢愉影响的能量/格挡/状态效果，受增笑和好活当赏影响
+    public static readonly CardKeyword Elation = ModContentRegistry.GetQualifiedKeywordId(Entry.ModId, nameof(Elation)).GetModCardKeyword();
 }

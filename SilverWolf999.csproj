@@ -16,6 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- TEMP: probe project exclusion (removed after API probing) -->
+    <Compile Remove=".probe\**" />
+    <None Remove=".probe\**" />
 
     <PackageReference Include="STS2.RitsuLib" Version="0.5.12" />
 

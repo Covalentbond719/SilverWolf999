@@ -1,6 +1,4 @@
-{
-    "SILVER_WOLF999_KEYWORD_ELATION_DAMAGE.title": "欢愉伤害",
-    "SILVER_WOLF999_KEYWORD_ELATION_DAMAGE.description": "卡牌造成的欢愉伤害会受到增笑和好活当赏的影响。",
-    "SILVER_WOLF999_KEYWORD_JOY.title": "欢愉",
-    "SILVER_WOLF999_KEYWORD_JOY.description": "好活当赏和增笑还会影响这种情况下的格挡和状态效果。"
+﻿{
+    "SILVER_WOLF999_KEYWORD_ELATION.title": "欢愉",
+    "SILVER_WOLF999_KEYWORD_ELATION.description": "[gold]欢愉伤害[/gold]和受到[gold]欢愉[/gold]影响的[gold]能量[/gold]、[gold]格挡[/gold]、[gold]状态效果[/gold]等，会被[gold]增笑[/gold]和[gold]好活当赏[/gold]影响。"
 }
