@@ -30,9 +30,10 @@ public class MirthPower : ModPowerTemplate
         public int BlockReward = 3;
     }
 
-    // 描述显示用变量
+    // 描述显示用变量（Step=触发阈值；Mmr/Block 由卡牌 SetRewards 按升级写入）
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
+        new DynamicVar("Step", Threshold),
         new DynamicVar("Mmr", 10m),
         new DynamicVar("Block", 3m),
     ];

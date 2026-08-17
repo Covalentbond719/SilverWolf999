@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -40,6 +41,12 @@ public class HiddenMmrPower : ModPowerTemplate
         IconPath: "res://SilverWolf999/images/powers/hidden_mmr.png",
         BigIconPath: "res://SilverWolf999/images/powers/hidden_mmr_big.png"
     );
+
+    // 描述显示用变量（Step=每30给1力量的步长）
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DynamicVar("Step", StrengthStep),
+    ];
 
     private class Data
     {

@@ -2,9 +2,9 @@
     "SILVER_WOLF999_POWER_PUNCHLINE_POWER.title":
     "笑点",
     "SILVER_WOLF999_POWER_PUNCHLINE_POWER.description":
-    "回合结束时发动阿哈时刻，消耗所有笑点，对所有敌人造成伤害",
+    "回合结束时发动阿哈时刻：\n消耗所有笑点，对所有敌人造成伤害",
     "SILVER_WOLF999_POWER_PUNCHLINE_POWER.smartDescription":
-    "回合结束时发动阿哈时刻，消耗所有笑点，对所有敌人造成[blue]{Damage}[/blue]点伤害",
+    "回合结束时发动阿哈时刻：\n消耗所有笑点，对所有敌人造成[blue]{Damage}[/blue]点伤害",
 
     "SILVER_WOLF999_POWER_LAUGH_BOOST_POWER.title":
     "增笑",
@@ -16,23 +16,23 @@
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.title":
     "好活当赏-剩余2回合",
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.description":
-    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。好活当赏会以同种方式影响卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。",
+    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。\n能够提高卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。",
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.smartDescription":
-    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。好活当赏会以同种方式影响卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。[blue]{Amount}[/blue]点还剩余2回合。",
+    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。\n能够提高卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。\n其中的[blue]{Amount}[/blue]点还剩余2回合。",
     
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_ONE_POWER.title":
     "好活当赏-剩余1回合",
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_ONE_POWER.description":
-    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。好活当赏会以同种方式影响卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。",
+    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。\n能够提高卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。",
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_ONE_POWER.smartDescription":
-    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。好活当赏会以同种方式影响卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。[blue]{Amount}[/blue]点还剩余1回合。",
+    "阿哈时刻结束后，消耗的笑点会被计入好活当赏。\n能够提高卡牌的欢愉伤害和受到欢愉影响的效果，至多使得它们被提升到4倍。\n其中的[blue]{Amount}[/blue]点还剩余1回合。",
     
     "SILVER_WOLF999_POWER_HIDDEN_MMR_POWER.title":
     "隐藏分",
     "SILVER_WOLF999_POWER_HIDDEN_MMR_POWER.description":
-    "隐藏分累计到60时，将一张[gold]无敌玩家，启动！[/gold]加入手牌。每获得30点隐藏分，获得1点[gold]力量[/gold]。",
+    "隐藏分达到60时，将一张[gold]无敌玩家，启动！[/gold]加入手牌。\n每获得[blue]30[/blue]点隐藏分，获得[blue]1[/blue]点[gold]力量[/gold]。",
     "SILVER_WOLF999_POWER_HIDDEN_MMR_POWER.smartDescription":
-    "当前隐藏分：[blue]{Amount}[/blue]。隐藏分累计到60时，将一张[gold]无敌玩家，启动！[/gold]加入手牌。每获得30点隐藏分，获得1点[gold]力量[/gold]。",
+    "当前隐藏分：[blue]{Amount}[/blue]。\n隐藏分达到60时，将一张[gold]无敌玩家，启动！[/gold]加入手牌。\n每获得[blue]{Step}[/blue]点隐藏分，获得[blue]1[/blue]点[gold]力量[/gold]。",
     
     "SILVER_WOLF999_POWER_GOD_MODE_POWER.title":
     "无敌玩家",
@@ -44,16 +44,17 @@
     "SILVER_WOLF999_POWER_MIRTH_POWER.title":
     "如是众生欢笑不已",
     "SILVER_WOLF999_POWER_MIRTH_POWER.description":
-    "你每获得5个[gold]笑点[/gold]，获得{Mmr}点[gold]隐藏分[/gold]和{Block}点[gold]格挡[/gold]。",
+    "你每获得5个[gold]笑点[/gold]，获得10点[gold]隐藏分[/gold]和3点[gold]格挡[/gold]。",
     "SILVER_WOLF999_POWER_MIRTH_POWER.smartDescription":
-    "你每获得5个[gold]笑点[/gold]，获得{Mmr}点[gold]隐藏分[/gold]和{Block}点[gold]格挡[/gold]。",
+    "你每获得[blue]{Step}[/blue]个[gold]笑点[/gold]，获得[blue]{Mmr}[/blue]点[gold]隐藏分[/gold]和[blue]{Block}[/blue]点[gold]格挡[/gold]。",
     
     "SILVER_WOLF999_POWER_DRAW_ON_PUNCHLINE_POWER.title":
     "我的回合，抽卡！",
     "SILVER_WOLF999_POWER_DRAW_ON_PUNCHLINE_POWER.description":
-    "你每获得12个[gold]笑点[/gold]，抽1张牌。",
+    "你每获得[blue]12[/blue]个[gold]笑点[/gold]，抽1张牌。",
     "SILVER_WOLF999_POWER_DRAW_ON_PUNCHLINE_POWER.smartDescription":
-    "你每获得{Step}个[gold]笑点[/gold]，抽1张牌。",
+    "你每获得[blue]{Step}[/blue]个[gold]笑点[/gold]，抽[blue]{Amount}[/blue]张牌。",
+
     "SILVER_WOLF999_POWER_DIVINE_LAUGHTER_POWER.title":
     "神说要有笑声",
     "SILVER_WOLF999_POWER_DIVINE_LAUGHTER_POWER.description":
