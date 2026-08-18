@@ -1,4 +1,4 @@
-﻿{
+{
     "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.title":
     "捧腹开怀",
     "SILVER_WOLF999_CARD_BELLY_LAUGH_CARD.description":
@@ -81,5 +81,10 @@
     "SILVER_WOLF999_CARD_REVELRY_CARD.title":
     "给你一只酱板鸭",
     "SILVER_WOLF999_CARD_REVELRY_CARD.description":
-    "获得3X个[gold]笑点[/gold]。\n[gold]欢愉[/gold]：获得{Block:diff()}X点[gold]格挡[/gold]。"
+    "获得3X个[gold]笑点[/gold]。\n[gold]欢愉[/gold]：获得{Block:diff()}X点[gold]格挡[/gold]。",
+
+    "SILVER_WOLF999_CARD_FIREWALL_CARD.title":
+    "防火墙",
+    "SILVER_WOLF999_CARD_FIREWALL_CARD.description":
+    "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。"
 }

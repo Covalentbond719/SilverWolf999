@@ -1,4 +1,4 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.5.1">
+<Project Sdk="Godot.NET.Sdk/4.5.1">
   <PropertyGroup>
     <!-- 如果你安装了10.0并遇到问题，改下这里 -->
     <TargetFramework>net10.0</TargetFramework>
@@ -16,9 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- TEMP: probe project exclusion (removed after API probing) -->
-    <Compile Remove=".probe\**" />
-    <None Remove=".probe\**" />
 
     <PackageReference Include="STS2.RitsuLib" Version="0.5.12" />
 

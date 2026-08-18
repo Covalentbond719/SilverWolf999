@@ -4,5 +4,13 @@
     "SILVER_WOLF999_RELIC_TRIPLE_NINE_CARTRIDGE_RELIC.description":
     "你每打出1张牌，获得1个[gold]笑点[/gold]。\n每场战斗开始时，获得5点[gold]好活当赏[/gold]。",
     "SILVER_WOLF999_RELIC_TRIPLE_NINE_CARTRIDGE_RELIC.flavor":
-    "“这才像个小丫头该有的样子。愿你永远保持弱小，你，合格了。”"
+    "“这才像个小丫头该有的样子。愿你永远保持弱小，你，合格了。”",
+    "SILVER_WOLF999_RELIC_TRIPLE_NINE_GUARD_RELIC.title":
+    "999安全卫士",
+    "SILVER_WOLF999_RELIC_TRIPLE_NINE_GUARD_RELIC.description":
+    "战斗开始时，获得1层[gold]人工制品[/gold]。",
+    "SILVER_WOLF999_RELIC_LAUGHTER_CAN_RELIC.title":
+    "笑声罐头",
+    "SILVER_WOLF999_RELIC_LAUGHTER_CAN_RELIC.description":
+    "战斗开始时，获得1点[gold]增笑[/gold]。"
 }

@@ -74,6 +74,7 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 - `DrawOnPunchlinePower` 我的回合，抽卡！：**每获得 12（升级 10）个笑点抽 1 张**，跨回合累计；阈值经 `SetStep` + DynamicVar "Step"
 - `GodModePower` 无敌玩家：2 层，下 2 个回合开始各塞一张隐藏关：狼尊时刻；**回合结束自然流失 1 层**（`SkipNextDurationTick` + `TickDownDuration`）；升级标志 `SetAddUpgraded` 控制塞升级版
 - `TemporaryLaughBoostPower` 临时增笑：`ModTemporaryAppliedPowerTemplate<JokeCard, LaughBoostPower>`——内部维护包装能力+真实增笑镜像，回合结束自动撤销；Title 取来源卡牌名
+- `FirewallPower` 防火墙：获得状态牌时将其消耗（`AfterCardEnteredCombat`）
 
 ### 卡牌 `Cards/`（角色卡，Necrobinder 池）
 
@@ -91,6 +92,7 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 - `MyTurnDrawCard` 我的回合，抽卡！（1费能力罕见）：给 1 层 DrawOnPunchlinePower；升级阈值 10
 - `BorrowTurnCard` 向天再借一回合（0费技能稀有，消耗）：丢所有手牌 + 从抽牌堆选 3 张入手；升级加保留
 - `RevelryCard` 给你一只酱板鸭（X费技能罕见，消耗）：**3X 笑点 + 欢愉：4X 公式格挡**；升级格挡 4X→5X
+- `FirewallCard` 防火墙（3费能力罕见）：**固有+保留**，打出给 1 层 FirewallPower（**获得状态牌时将其消耗**，`AfterCardEnteredCombat` 守卫 `card.Owner==Owner.Player && card.Type==CardType.Status` → `CardCmd.Exhaust`）；**升级：3费→2费（`EnergyCost.UpgradeBy(-1)`）**
 
 ### Token 卡（无角色）
 
@@ -100,6 +102,9 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 ### 遗物
 
 - `TripleNineCartridgeRelic` 999卡带（**Necrobinder 起始遗物** + SharedRelicPool，Rare）：每打出 1 张牌（仅自己）+1 笑点；战斗开始 +5 好活当赏-剩余2回合；**图标已由用户提供**（`triple_nine_cartridge.png` / `_big.png` 为真实 PNG）
+- `TripleNineGuardRelic` 999安全卫士（**Necrobinder 专属池** `NecrobinderRelicPool`，Common）：战斗开始 +1 人工制品（`BeforeCombatStart` + `PowerCmd.Apply<ArtifactPower>`）；悬浮预览人工制品
+- `LaughterCanRelic` 笑声罐头（**Necrobinder 专属池**，Rare）：战斗开始 +1 增笑；悬浮预览增笑
+  > 说明：Necrobinder 专属遗物注册到 `NecrobinderRelicPool`（非 SharedRelicPool）；原版：`RelicRarity.Common/Rare`
 
 ### 词条与悬浮
 
@@ -134,7 +139,10 @@ card SILVER_WOLF999_CARD_OUT_OF_CARDS_CARD
 card SILVER_WOLF999_CARD_MY_TURN_DRAW_CARD
 card SILVER_WOLF999_CARD_BORROW_TURN_CARD
 card SILVER_WOLF999_CARD_REVELRY_CARD
+card SILVER_WOLF999_CARD_FIREWALL_CARD
 relic SILVER_WOLF999_RELIC_TRIPLE_NINE_CARTRIDGE_RELIC
+relic SILVER_WOLF999_RELIC_TRIPLE_NINE_GUARD_RELIC
+relic SILVER_WOLF999_RELIC_LAUGHTER_CAN_RELIC
 ```
 > 无敌玩家/隐藏关狼尊时刻是 Token 卡，无法直接 `card` 拿，通过 隐藏分60 → 无敌玩家 → 狼尊时刻 链式获得。
 

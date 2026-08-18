@@ -16,7 +16,7 @@
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.title":
     "好活当赏",
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.description":
-    "阿哈时刻结束后，消耗的[gold]笑点[/gold]会被计入好活当赏。\n能够提高卡牌的[gold]欢愉[/gold]伤害和受到[gold]欢愉[/gold]影响的效果，至多使得它们被提升到[green]400%[/green]。",
+    "阿哈时刻结束后，消耗的[gold]笑点[/gold]会被计入好活当赏。\n能够提高卡牌的[gold]欢愉[/gold]伤害和受到[gold]欢愉[/gold]影响的效果，至多使得它们被提升到[green]400%[/green]。好活当赏持续2回合，每次获得的好活当赏持续时间[blue]分别计算[/blue]。",
     "SILVER_WOLF999_POWER_CERTIFIED_BANGER_TWO_POWER.smartDescription":
     "阿哈时刻结束后，消耗的[gold]笑点[/gold]会被计入好活当赏。\n能够提高卡牌的[gold]欢愉[/gold]伤害和受到[gold]欢愉[/gold]影响的效果，至多使得它们被提升到[green]400%[/green]。\n其中的[blue]{Amount}[/blue]点还剩余2回合。",
     
@@ -60,5 +60,12 @@
     "SILVER_WOLF999_POWER_DIVINE_LAUGHTER_POWER.description":
     "每消耗1点能量，获得1个[gold]笑点[/gold]。",
     "SILVER_WOLF999_POWER_DIVINE_LAUGHTER_POWER.smartDescription":
-    "每消耗1点能量，获得[blue]{Amount}[/blue]个[gold]笑点[/gold]。"
+    "每消耗1点能量，获得[blue]{Amount}[/blue]个[gold]笑点[/gold]。",
+
+    "SILVER_WOLF999_POWER_FIREWALL_POWER.title":
+    "防火墙",
+    "SILVER_WOLF999_POWER_FIREWALL_POWER.description":
+    "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。",
+    "SILVER_WOLF999_POWER_FIREWALL_POWER.smartDescription":
+    "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。"
 }
