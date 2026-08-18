@@ -1,7 +1,7 @@
 # Agent 备忘
 
 > 项目性质：**杀戮尖塔2（Slay the Spire 2）C# 模组**，Godot 4.5.1 + RitsuLib 0.5.12。
-> 说明：本文件内容应与当前工程代码/本地化保持一致，改实装前先核对此部分。
+> 说明：本文件内容应与当前工程代码/本地化保持一致，改实装前先核对此部分，改实装后要修改此文件。
 
 ## 关键路径
 
@@ -70,7 +70,7 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 - `CertifiedBangerTwoPower`/`OnePower` 好活当赏-剩余1/2回合：纯计数器；Two 回合结束转同层 One 后移除，One 回合结束移除
 - `HiddenMmrPower` 隐藏分：累计到 60 时（仅一次）塞一张"无敌玩家，启动！"；**每 30 给 1 力量（无门槛，`Amount/30` 增量同步 StrengthPower）**；悬浮预览无敌玩家
 - `MirthPower` 如是众生欢笑不已：**每获得 5 个笑点 → 10 隐藏分 + 3 格挡**（升级 12/4，卡牌 `SetRewards` 传入；累计余数跨回合；格挡 Unpowered 平值）
-- `DivineLaughterPower` 神说要有笑声：每消耗 1 能量 → 1 笑点（`AfterEnergySpent`）
+- `DivineLaughterPower` 神说要有笑声：每消耗 1 能量 → 获得"本能力层数 Amount"个笑点（`AfterEnergySpent`，**多次打出能力卡叠加层数后每能量给更多笑点**；smartDescription 用 `{Amount}`）
 - `DrawOnPunchlinePower` 我的回合，抽卡！：**每获得 12（升级 10）个笑点抽 1 张**，跨回合累计；阈值经 `SetStep` + DynamicVar "Step"
 - `GodModePower` 无敌玩家：2 层，下 2 个回合开始各塞一张隐藏关：狼尊时刻；**回合结束自然流失 1 层**（`SkipNextDurationTick` + `TickDownDuration`）；升级标志 `SetAddUpgraded` 控制塞升级版
 - `TemporaryLaughBoostPower` 临时增笑：`ModTemporaryAppliedPowerTemplate<JokeCard, LaughBoostPower>`——内部维护包装能力+真实增笑镜像，回合结束自动撤销；Title 取来源卡牌名

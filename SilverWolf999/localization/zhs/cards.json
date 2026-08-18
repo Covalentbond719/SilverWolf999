@@ -12,7 +12,7 @@
     "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.title":
     "隐藏关：狼尊时刻",
     "SILVER_WOLF999_CARD_WOLF_MOMENT_CARD.description":
-    "对所有敌人造成{Damage:diff()}点[gold]欢愉[/gold]伤害{IfUpgraded:show:2次|}.\n对随机敌人造成{Damage:diff()}点[gold]欢愉[/gold]伤害{IfUpgraded:show:X+1次|X次}。",
+    "对所有敌人造成{Damage:diff()}点[gold]欢愉[/gold]伤害{IfUpgraded:show:2次|}。\n对随机敌人造成{Damage:diff()}点[gold]欢愉[/gold]伤害{IfUpgraded:show:X+1次|X次}。",
 
     "SILVER_WOLF999_CARD_SMILE_CARD.title":
     "喜剧人",
