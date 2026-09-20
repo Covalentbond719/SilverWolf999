@@ -33,8 +33,12 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 - `CreatureCmd.Damage(choiceContext, IEnumerable<Creature>, decimal, ValueProp, Creature dealer, ...)` 群伤；`CreatureCmd.GainBlock(Creature, decimal, ValueProp, CardPlay?, bool fast)`
 - 回合钩子（AbstractModel 虚方法）：`AfterSideTurnEnd(choiceContext, CombatSide, IEnumerable<Creature>)`、`AfterSideTurnStart(...)`、`AfterPlayerTurnStart(choiceContext, Player)`、`BeforeCombatStart()`（无参）、`AfterCardPlayed(choiceContext, CardPlay)`、**`AfterEnergySpent(CardModel card, int amount)`（无 choiceContext，用 `new ThrowingPlayerChoiceContext()`）**
 - `AfterPowerAmountChanged(PlayerChoiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)`（第一个参数也是 choiceContext；监听所有能力变化，用 `power == this` 或类型判断过滤）
+- **格挡/破防钩子**：`AfterBlockBroken(PlayerChoiceContext, Creature target, Creature? breaker)`（格挡被扣到 0 时触发）、`BeforeBlockGained`/`AfterBlockGained(creature, amount, props, cardSource)`（**无 choiceContext**）、`ShouldClearBlock(Creature)`→bool、`AfterPreventingBlockClear(AbstractModel preventer, Creature creature)`
+- **伤害修正钩子**（都在 `Hook.ModifyDamage` 里，**整段跑在扣格挡之前**）：`ModifyDamageAdditive(target, amount, props, dealer, cardSource, cardPlay)`→加的增量、`ModifyDamageMultiplicative(...)`→乘数、`ModifyDamageCap(target, props, dealer, cardSource, cardPlay)`→**单次攻击伤害上限**（默认 `decimal.MaxValue`）。`ModifyDamageInternal` 内顺序＝**加法 → 乘法 → 上限**，且上限取所有监听者的最小值
+- **扣血钩子**（在"格挡已结算完、血还没扣"的位置）：`ModifyHpLostBeforeOsty(target, amount, props, dealer, cardSource)` → 再 `ModifyHpLostBeforeOstyLate(...)` → `ModifyHpLostAfterOsty(...)`/`...Late(...)`；每段命中各走一遍，**`amount` 此时已经是溢出伤害**（格挡已扣掉，再改它只能改最终扣血量，改不了"格挡差值"）
+- **`CreatureCmd.Damage` 单段命中时序**（多段命中＝该流程重复多次）：`Hook.ModifyDamage`（加法→乘法→上限）→ `BeforeDamageReceived` → `Creature.DamageBlockInternal`（`Block -= min(Block,伤害)`，返回被格挡量）→ `ModifyHpLost(BeforeOsty)` → `ModifyHpLost(AfterOsty)` → `LoseHpInternal` → **之后**才 `AfterBlockBroken`（仅破防时）→ `AfterDamageGiven` → `AfterDamageReceived`  ⇒ **`ModifyDamage` / `BeforeDamageReceived` 都跑在扣格挡之前，但只有前者能改数值（且会被预览调用）**；扣血钩子只能改最终扣多少血，改不了"格挡吸收了多少"
 - 能力钩子守卫：`if (side != Owner.Side) return;`（能力 `Owner` 是 **Creature**）；遗物/卡牌 `Owner` 是 **Player**（用 `Owner.Creature` 拿生物）
-- `Creature.GetPowerAmount<T>()` 读层数（无则 0）；`ICombatState.HittableEnemies` / `GetOpponentsOf(Owner)` 取敌人
+- `Creature.GetPowerAmount<T>()` 读层数（无则 0，内部 `GetPower<T>()?.Amount ?? 0`）；**`GetPower<T>()` 是纯类型匹配 `_powers.FirstOrDefault(p => p is T)`，与 `Id`/本地化 key 字符串无关**（`GetPower(ModelId)` 才是按 ID 查）；`ICombatState.HittableEnemies` / `GetOpponentsOf(Owner)` 取敌人
 - `PowerModel.AllowNegative` 可覆写；`PowerModel.CanonicalVars` 是 `protected virtual`
 - **能力描述动态数值**：`CanonicalVars => [new DamageVar(x, ValueProp.Unpowered)]`，钩子里 `DynamicVars.Damage.BaseValue = ...` 刷新，smartDescription 用 `{Damage}`。RitsuLib `ComputedDynamicVar`/`ModCardVars` 是**卡牌专用**（factory 参数是 CardModel），能力不能用
 - **卡牌动态数值**：`ModCardVars.ComputedDamage/ComputedBlock/Computed/Int("名", 工厂或基础值, ...)`；打出时用 `DynamicVars.EvaluateValueOrDefault("名", target: ...)` 读实时值（**计算型变量别读 BaseValue**，那是存储基础值）；`OnUpgrade` 里 `DynamicVars["名"].UpgradeValueBy(n)` 改基础值
@@ -47,8 +51,8 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 
 ## RitsuLib 自动注册与 ID
 
-- `Entry.cs` 已调 `ModTypeDiscoveryHub.RegisterModAssembly`，内容类只需加特性：`[RegisterPower]`、`[RegisterRelic(typeof(SharedRelicPool))]`、`[RegisterCard(typeof(NecrobinderCardPool))]`
-- **本模组所有角色卡都在亡灵契约师（Necrobinder）卡池**（`MegaCrit.Sts2.Core.Models.CardPools.NecrobinderCardPool`）；**捧腹开怀是 Necrobinder 起始卡×2**，**999卡带是 Necrobinder 起始遗物**；无敌玩家/隐藏关狼尊时刻是 **Token 池**（无角色，`CardRarity.Token`，不进货架/图鉴）
+- `Entry.cs` 已调 `ModTypeDiscoveryHub.RegisterModAssembly`，内容类只需加特性：`[RegisterPower]`、`[RegisterRelic(typeof(SharedRelicPool))]`、`[RegisterCard(typeof(SilentCardPool))]`
+- **本模组所有角色卡都在沉默猎手（Silent）卡池**（`MegaCrit.Sts2.Core.Models.CardPools.SilentCardPool`，`[RegisterCard(typeof(SilentCardPool))]`）；**捧腹开怀是 Silent 起始卡×2**，**999卡带是 Necrobinder 起始遗物**；无敌玩家/隐藏关狼尊时刻是 **Token 池**（无角色，`CardRarity.Token`，不进货架/图鉴）
 - ID 规则：`{MODID}_{类别}_{类名全称}`（snake_case 大写）。例：`BellyLaughCard` → `SILVER_WOLF999_CARD_BELLY_LAUGH_CARD`；`PunchlinePower` → `SILVER_WOLF999_POWER_PUNCHLINE_POWER`
 - **数字会粘在前一个单词上**（`SilverWolf999` → `SILVER_WOLF999`）。为避免歧义，类名**别带数字**
 - 本地化：`SilverWolf999/localization/zhs/` 下 `cards.json` / `powers.json` / `relics.json` / `card_keywords.json`；`{Amount}` 只对 `smartDescription` 生效（description 不展开）
@@ -56,7 +60,7 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 
 ## 本模组已实现内容（与当前代码/本地化一致）
 
-> 卡牌显示名 = 本地化 title；类名 = 代码名。角色卡全在 Necrobinder 池。
+> 卡牌显示名 = 本地化 title；类名 = 代码名。角色卡全在 Silent（沉默猎手）池。
 
 ### 核心公式 `Cards/PunchlineDamage.cs`
 
@@ -75,8 +79,23 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 - `GodModePower` 无敌玩家：2 层，下 2 个回合开始各塞一张隐藏关：狼尊时刻；**回合结束自然流失 1 层**（`SkipNextDurationTick` + `TickDownDuration`）；升级标志 `SetAddUpgraded` 控制塞升级版
 - `TemporaryLaughBoostPower` 临时增笑：`ModTemporaryAppliedPowerTemplate<JokeCard, LaughBoostPower>`——内部维护包装能力+真实增笑镜像，回合结束自动撤销；Title 取来源卡牌名
 - `FirewallPower` 防火墙：获得状态牌时将其消耗（`AfterCardEnteredCombat`）
+- `AmberPower` 琥珀：**格挡不足时把这一击的伤害压到格挡值，使溢出伤害作废；本来就没格挡时伤害照常**。实现＝覆写 `ModifyDamageCap`：`InIntentDisplay || target != Owner || Block <= 0` → `decimal.MaxValue`（不介入）；否则返回 `Block`。逐段判定 ⇒"格挡够就全免、被吃空后那段照常受伤"
+  > **敌人意图显示必须单独屏蔽**（根因，实测确认）：意图数字来自 `AttackIntent.GetSingleDamage(targets, owner)`，它内部**以玩家自己为 target、用 `CardPreviewMode.None` 裸调 `Hook.ModifyDamage`** 来算"你会受到多少" —— 于是琥珀的上限被算进意图数字（意图显示成被压低的数值）。`SingleAttackIntent.GetTotalDamage` / `MultiAttackIntent.GetTotalDamage` 都转调 `GetSingleDamage`，所以只需要给这一个方法打前缀（`AmberIntentDisplayPatch`）置 `AmberPatchLog.InIntentDisplay`，琥珀据此刻意不介入
+  > **六代方案取舍（教训，别再走弯路）**：① `AfterBlockBroken` 置标记 + 改溢出伤害 —— 实测仍扣血（扣血钩子改不了"格挡吸收了多少"）；② `ModifyDamageCap` 裸用 —— 效果对但污染意图显示；③ Harmony 前缀补丁 `Creature.DamageBlockInternal` + `ref decimal amount` —— **实测失效，赋值传不回调用方**（`block=1` 挨 4 点仍扣 3 血），**别指望 Harmony `ref` 参数回写调用方局部变量**；④ `ModifyDamageCap` + `CardPreviewMode` 预览屏蔽 —— 实测意图仍污染（意图走 `CardPreviewMode.None` 裸调用）；⑤ "结算窗口"改用 `AfterModifyingDamageAmount` 开窗 —— **实测生命值失效**，因为该钩子在 `CreatureCmd.Damage` 里是 `ModifyDamage` **之后**才派发的，开窗时本次命中已算完；⑥ 最终＝②+给 `AttackIntent.GetSingleDamage` 打前缀屏蔽意图
+  > **未覆写 `AssetProfile` → 图标回退 `missing_power.png`，待补图**
 
-### 卡牌 `Cards/`（角色卡，Necrobinder 池）
+### 补丁 `Patches/`
+
+- Harmony 在 `Scripts/Entry.cs` 的 `Init()` 里应用（`ApplyHarmonyPatches()`）：`new Harmony(ModId).PatchAll(assembly)`，之后用 `Harmony.GetPatchInfo(AttackIntent.GetSingleDamage)` 自检并记日志；整套 try/catch
+- `AmberIntentDisplayPatch`（`Patches/AmberPatch.cs`）：`[HarmonyPatch(typeof(AttackIntent), nameof(AttackIntent.GetSingleDamage))]` + `Prefix/Postfix()`，置/清 `AmberPatchLog.InIntentDisplay` —— **这是让敌人意图显示真实伤害的关键**
+- `AmberModifyDamageProbePatch`：`[HarmonyPatch(typeof(Hook), nameof(Hook.ModifyDamage))]` + `Postfix`，**纯诊断**：打印 `mode / intentDisplay / target / block / in / out`
+- 补充事实：`ValueProp.Unblockable` 在本版本**只有枚举定义、全工程无任何调用点**，不必特判穿盾伤害
+- **诊断**：日志搜 ASCII 标记 `ModifyDamage`（中文在 `godot.log` 里可能是 GBK 乱码如 `鐞ョ弨`，直接搜中文会漏）：
+  - `ModifyDamage mode=None intentDisplay=True block=1 in=4 out=4` ← 意图显示，值没被压（正确）
+  - `ModifyDamage mode=None intentDisplay=False block=1 in=4 out=1` ← 实际结算，值被压（正确）
+- 排障经验：运行时 RitsuLib 是 Steam 版 0.6.2、编译引用是 NuGet 0.5.12，但两者 **SHA256 完全相同（`7303DA3E…`）**，不是版本问题；游戏日志在 `%APPDATA%\SlayTheSpire2\logs\godot.log`（含 `DevConsole:` 行与战斗过程）
+
+### 卡牌 `Cards/`（角色卡，Silent 池）
 
 - `BellyLaughCard` 捧腹开怀（1费攻击常见，**Necrobinder 起始×2**）：**6 欢愉伤害（公式）**，升级 +2（→8）；卡图硬编码 TestCard.png
 - `SunkAgainCard` 又沉底了？（1费攻击常见）：**4 欢愉伤害（公式，升级 +2）** + 抽 1 张；**升级抽牌数走公式**（`ResolveWhenUpgraded`，基础 1）
@@ -93,6 +112,7 @@ PowerShell 5.1 是 .NET Framework，加载不了 net9.0 程序集。两种方案
 - `BorrowTurnCard` 向天再借一回合（0费技能稀有，消耗）：丢所有手牌 + 从抽牌堆选 3 张入手；升级加保留
 - `RevelryCard` 给你一只酱板鸭（X费技能罕见，消耗）：**3X 笑点 + 欢愉：4X 公式格挡**；升级格挡 4X→5X
 - `FirewallCard` 防火墙（3费能力罕见）：**固有+保留**，打出给 1 层 FirewallPower（**获得状态牌时将其消耗**，`AfterCardEnteredCombat` 守卫 `card.Owner==Owner.Player && card.Type==CardType.Status` → `CardCmd.Exhaust`）；**升级：3费→2费（`EnergyCost.UpgradeBy(-1)`）**
+- `AmberCard` 琥珀（**3费能力稀有**）：打出给 1 层 AmberPower（**伤害超过格挡时压到格挡值，溢出伤害作废**）；**升级：3费→2费（`EnergyCost.UpgradeBy(-1)`）**
 
 ### Token 卡（无角色）
 
@@ -125,6 +145,7 @@ power SILVER_WOLF999_POWER_MIRTH_POWER 1 0
 power SILVER_WOLF999_POWER_DRAW_ON_PUNCHLINE_POWER 1 0
 power SILVER_WOLF999_POWER_DIVINE_LAUGHTER_POWER 1 0
 power SILVER_WOLF999_POWER_GOD_MODE_POWER 2 0
+power SILVER_WOLF999_POWER_AMBER_POWER 1 0     # 琥珀：先攒格挡再挨打，验证 4格挡/8伤害 与 4格挡/3伤害×3
 card SILVER_WOLF999_CARD_BELLY_LAUGH_CARD
 card SILVER_WOLF999_CARD_SUNK_AGAIN_CARD
 card SILVER_WOLF999_CARD_AHA_STRIKE_CARD
@@ -140,6 +161,7 @@ card SILVER_WOLF999_CARD_MY_TURN_DRAW_CARD
 card SILVER_WOLF999_CARD_BORROW_TURN_CARD
 card SILVER_WOLF999_CARD_REVELRY_CARD
 card SILVER_WOLF999_CARD_FIREWALL_CARD
+card SILVER_WOLF999_CARD_AMBER_CARD
 relic SILVER_WOLF999_RELIC_TRIPLE_NINE_CARTRIDGE_RELIC
 relic SILVER_WOLF999_RELIC_TRIPLE_NINE_GUARD_RELIC
 relic SILVER_WOLF999_RELIC_LAUGHTER_CAN_RELIC
@@ -148,7 +170,8 @@ relic SILVER_WOLF999_RELIC_LAUGHTER_CAN_RELIC
 
 ### 待办
 
-- 目前无（遗物图标已由用户补齐）。
+- **琥珀能力图缺图**：`AmberPower` 未覆写 `AssetProfile`，暂回退 `missing_power.png`；补图路径约定为 `SilverWolf999/images/powers/amber.png`（64×64）与 `amber_big.png`（256×256）
+- **琥珀本地化已由用户补齐**（`SILVER_WOLF999_CARD_AMBER_CARD.*` / `SILVER_WOLF999_POWER_AMBER_POWER.*`，文案由用户自己写，改文案别动结构）
 
 ## 沙箱/构建注意事项
 
