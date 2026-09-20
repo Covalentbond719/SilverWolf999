@@ -67,5 +67,12 @@
     "SILVER_WOLF999_POWER_FIREWALL_POWER.description":
     "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。",
     "SILVER_WOLF999_POWER_FIREWALL_POWER.smartDescription":
-    "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。"
+    "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。",
+
+    "SILVER_WOLF999_POWER_AMBER_POWER.title":
+    "琥珀",
+    "SILVER_WOLF999_POWER_AMBER_POWER.description":
+    "你的[gold]格挡[/gold]现在能够抵消溢出伤害。",
+    "SILVER_WOLF999_POWER_AMBER_POWER.smartDescription":
+    "你的[gold]格挡[/gold]现在能够抵消溢出伤害。"
 }

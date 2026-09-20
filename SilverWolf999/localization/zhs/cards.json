@@ -86,5 +86,10 @@
     "SILVER_WOLF999_CARD_FIREWALL_CARD.title":
     "防火墙",
     "SILVER_WOLF999_CARD_FIREWALL_CARD.description":
-    "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。"
+    "你获得[gold]状态牌[/gold]时，将其[gold]消耗[/gold]。",
+
+    "SILVER_WOLF999_CARD_AMBER_CARD.title":
+    "琥珀",
+    "SILVER_WOLF999_CARD_AMBER_CARD.description":
+    "你的[gold]格挡[/gold]现在能够抵消溢出伤害。"
 }
