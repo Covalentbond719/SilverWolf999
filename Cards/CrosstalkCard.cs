@@ -14,8 +14,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（这里是无色）
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定池
+[RegisterCard(typeof(SilentCardPool))]
 public class CrosstalkCard : ModCardTemplate
 {
     // 基础数值：获得1点增笑（升级2点）

@@ -13,10 +13,10 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace SilverWolf999.Relics;
 
 // 注册到亡灵契约师专属遗物池
-[RegisterRelic(typeof(NecrobinderRelicPool))]
+[RegisterRelic(typeof(SilentRelicPool))]
 public class TripleNineGuardRelic : ModRelicTemplate
 {
-    public override RelicRarity Rarity => RelicRarity.Common;
+    public override RelicRarity Rarity => RelicRarity.Rare;
 
     public override RelicAssetProfile AssetProfile => new(
         IconPath: "res://SilverWolf999/images/relics/triple_nine_guard.png",

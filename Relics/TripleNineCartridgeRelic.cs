@@ -16,14 +16,14 @@ namespace SilverWolf999.Relics;
 /// <summary>
 /// 999卡带：
 /// 你每打出1张牌，获得1个"笑点"（Punchline）。
-/// 每场战斗开始时，获得5层"好活当赏-剩余2回合"（Certified Banger）。
+/// 每场战斗开始时，获得5层"好活当赏"（Certified Banger）。
 /// </summary>
-// 注册到共享遗物池 + 铁甲战士起始遗物
-[RegisterRelic(typeof(SharedRelicPool))]
-[RegisterCharacterStarterRelic(typeof(Necrobinder), 1)]
+// 注册到遗物池 + 起始遗物
+[RegisterRelic(typeof(SilentRelicPool))]
+[RegisterCharacterStarterRelic(typeof(Silent), 1)]
 public class TripleNineCartridgeRelic : ModRelicTemplate
 {
-    public override RelicRarity Rarity => RelicRarity.Rare;
+    public override RelicRarity Rarity => RelicRarity.Starter;
 
     public override RelicAssetProfile AssetProfile => new(
         // 小图标（原版85x85）

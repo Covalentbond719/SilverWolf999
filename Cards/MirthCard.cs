@@ -14,8 +14,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到铁甲战士卡池
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定卡池
+[RegisterCard(typeof(SilentCardPool))]
 public class MirthCard : ModCardTemplate
 {
     // 基础数值：每次奖励 10隐藏分 + 3格挡（升级后 12 / 4）

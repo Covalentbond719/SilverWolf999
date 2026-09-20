@@ -13,7 +13,7 @@ using SilverWolf999.Powers;
 namespace SilverWolf999.Relics;
 
 // 注册到亡灵契约师专属遗物池
-[RegisterRelic(typeof(NecrobinderRelicPool))]
+[RegisterRelic(typeof(SilentRelicPool))]
 public class LaughterCanRelic : ModRelicTemplate
 {
     public override RelicRarity Rarity => RelicRarity.Rare;

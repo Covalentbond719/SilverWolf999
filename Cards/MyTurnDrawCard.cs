@@ -12,8 +12,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到铁甲战士卡池
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定卡池
+[RegisterCard(typeof(SilentCardPool))]
 public class MyTurnDrawCard : ModCardTemplate
 {
     // 悬浮提示：预览授予的buff + "笑点"

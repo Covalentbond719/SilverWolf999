@@ -17,8 +17,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到铁甲战士卡池
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定卡池
+[RegisterCard(typeof(SilentCardPool))]
 public class BigMoveCard : ModCardTemplate
 {
     // 目标：升级后变为所有敌人

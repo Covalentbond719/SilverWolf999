@@ -15,10 +15,10 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（铁甲战士卡池）
-[RegisterCard(typeof(NecrobinderCardPool))]
-// 注册成铁甲战士的起始卡，后面是数量（2张）
-[RegisterCharacterStarterCard(typeof(Necrobinder), 2)]
+// 注册卡牌到指定池
+[RegisterCard(typeof(SilentCardPool))]
+// 注册成起始卡，后面是数量（2张）
+[RegisterCharacterStarterCard(typeof(Silent), 2)]
 public class BellyLaughCard : ModCardTemplate
 {
     // 基础耗能
@@ -26,7 +26,7 @@ public class BellyLaughCard : ModCardTemplate
     // 卡牌类型
     private const CardType type = CardType.Attack;
     // 卡牌稀有度
-    private const CardRarity rarity = CardRarity.Common;
+    private const CardRarity rarity = CardRarity.Basic;
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.AnyEnemy;
     // 是否在卡牌图鉴中显示

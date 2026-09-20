@@ -15,8 +15,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（这里是无色）
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定池
+[RegisterCard(typeof(SilentCardPool))]
 public class SmileCard : ModCardTemplate
 {
     // 卡牌基础数值：5格挡（升级后走欢愉公式） / 5笑点 / 4隐藏分 / 3好活当赏（升级后 7 / 6 / 5）

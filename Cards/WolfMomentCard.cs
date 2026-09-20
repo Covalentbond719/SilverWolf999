@@ -49,7 +49,7 @@ public class WolfMomentCard : ModCardTemplate
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         int x = ResolveEnergyXValue();
-        if (x <= 0)
+        if (x < 0)
         {
             return;
         }
@@ -72,6 +72,8 @@ public class WolfMomentCard : ModCardTemplate
                 .TargetingAllOpponents(combat)
                 .Execute(choiceContext);
         }
+
+        if (x == 0) return;
 
         // 第二阶段：对随机敌人造成7欢愉伤害（未升级X次 / 升级后X+1次）
         int singleHits = IsUpgraded ? x + 1 : x;

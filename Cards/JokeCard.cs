@@ -12,8 +12,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到指定池（这里是无色）
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定池
+[RegisterCard(typeof(SilentCardPool))]
 public class JokeCard : ModCardTemplate
 {
     // 消耗；升级后去除

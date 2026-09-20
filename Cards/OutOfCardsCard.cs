@@ -14,8 +14,8 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到铁甲战士卡池
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定卡池
+[RegisterCard(typeof(SilentCardPool))]
 public class OutOfCardsCard : ModCardTemplate
 {
     // 消耗

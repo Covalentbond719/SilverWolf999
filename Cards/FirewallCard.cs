@@ -12,8 +12,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到亡灵契约师卡池
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定卡池
+[RegisterCard(typeof(SilentCardPool))]
 public class FirewallCard : ModCardTemplate
 {
     // 固有 + 保留

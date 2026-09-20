@@ -15,8 +15,8 @@ using SilverWolf999.Powers;
 
 namespace SilverWolf999.Cards;
 
-// 注册卡牌到铁甲战士卡池
-[RegisterCard(typeof(NecrobinderCardPool))]
+// 注册卡牌到指定卡池
+[RegisterCard(typeof(SilentCardPool))]
 public class SunkAgainCard : ModCardTemplate
 {
     // 基础数值：4点欢愉伤害（公式）；抽牌数（升级后走公式，未升级固定1）
